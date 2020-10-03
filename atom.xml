@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://billpenn2005.github.io</id>
     <title>Gridea</title>
-    <updated>2020-10-03T11:49:57.727Z</updated>
+    <updated>2020-10-03T12:51:38.111Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://billpenn2005.github.io"/>
     <link rel="self" href="https://billpenn2005.github.io/atom.xml"/>
@@ -10,6 +10,103 @@
     <logo>https://billpenn2005.github.io/images/avatar.png</logo>
     <icon>https://billpenn2005.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[LCA]]></title>
+        <id>https://billpenn2005.github.io/post/lca/</id>
+        <link href="https://billpenn2005.github.io/post/lca/">
+        </link>
+        <updated>2020-10-03T12:14:05.000Z</updated>
+        <content type="html"><![CDATA[<p><a href="https://www.luogu.com.cn/problem/solution/P3379">原题</a></p>
+<pre><code class="language-C++">#include&lt;iostream&gt;
+using namespace std;
+struct edge{
+	int y,next;
+}edges[100001];
+int first[1000001],ta=0;
+void addE(int x,int y)
+{
+	edges[++ta].y=y;
+	edges[ta].next=first[x];
+	first[x]=ta;
+}
+int fa[100001][1001];
+int dep[100001];
+int n,m,s;
+bool mark[1000001];
+int mx[1000001];
+void dfs(int x,int f)
+{
+	dep[x]=dep[f]+1;
+	fa[x][0]=f;
+	//int fr;
+	if(mark[x]==1)
+	{
+		for(int i=1;i&lt;=mx[x];++i)
+			fa[x][i]=fa[fa[x][i-1]][i-1];
+	}
+	else
+	{
+		int maxx=0;
+		for(int i=1;dep[x]-(1&lt;&lt;i)&gt;=0;++i)
+		{
+			maxx=i;
+			fa[x][i]=fa[fa[x][i-1]][i-1];
+		}
+		mark[x]=1;
+		mx[x]=maxx;
+	}
+	for(int i=first[x];i;i=edges[i].next)
+		if(edges[i].y!=f)
+			dfs(edges[i].y,x);
+}
+int go(int x,int l,int p)
+{
+	if(l==0)
+		return x;
+	if(l%2==1)
+		return go(fa[x][p],l&gt;&gt;1,p+1);
+	return go(x,l&gt;&gt;1,p+1);
+}
+int LCA(int x,int y)
+{
+	if(dep[x]&lt;dep[y])
+		swap(x,y);
+	x=go(x,dep[x]-dep[y],0);
+	if(x==y)
+		return x;
+	for(int i=mx[x];i&gt;=0;--i)
+	{
+		if(fa[x][i]!=fa[y][i])
+		{
+			x=fa[x][i];
+			y=fa[y][i];
+		}
+	}
+	return fa[x][0];
+}
+int main()
+{
+	cin&gt;&gt;n&gt;&gt;m&gt;&gt;s;
+	for(int i=1;i&lt;n;++i)
+	{
+		int x,y;
+		cin&gt;&gt;x&gt;&gt;y;
+		addE(x,y);
+		addE(y,x);
+	}
+	dfs(s,0);
+	for(int i=1;i&lt;=m;++i)
+	{
+		int x,y;
+		cin&gt;&gt;x&gt;&gt;y;
+		cout&lt;&lt;LCA(x,y)&lt;&lt;endl;
+	}
+	return 0;
+}
+</code></pre>
+<p><a href="https://www.luogu.com.cn/record/39204477">AC</a></p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Hello Gridea]]></title>
         <id>https://billpenn2005.github.io/post/hello-gridea/</id>
