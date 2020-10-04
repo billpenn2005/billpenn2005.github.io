@@ -2,23 +2,23 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>关于 | Gridea</title>
+<title>NOIP2000 方格取数 | Gridea</title>
 <link rel="shortcut icon" href="https://billpenn2005.github.io/favicon.ico?v=1601813810675">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://billpenn2005.github.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="关于 | Gridea - Atom Feed" href="https://billpenn2005.github.io/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="NOIP2000 方格取数 | Gridea - Atom Feed" href="https://billpenn2005.github.io/atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-    <meta name="description" content="
-欢迎来到我的小站呀，很高兴遇见你！🤝
-
-🏠 关于本站
-👨‍💻 博主是谁
-⛹ 兴趣爱好
-📬 联系我呀
-..." />
+    <meta name="description" content="DP
+原题
+#include&lt;iostream&gt;
+using namespace std;
+int f[11][11][11][11];
+bool mark[11][11][11][11];
+int a[11][11];
+int..." />
     <meta name="keywords" content="" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
@@ -81,46 +81,97 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              关于
+              NOIP2000 方格取数
             </h2>
             <div class="post-info">
               <span>
-                2019-01-25
+                2020-10-04
               </span>
               <span>
-                1 min read
+                2 min read
               </span>
               
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <blockquote>
-<p>欢迎来到我的小站呀，很高兴遇见你！🤝</p>
-</blockquote>
-<h2 id="关于本站">🏠 关于本站</h2>
-<h2 id="博主是谁">👨‍💻 博主是谁</h2>
-<h2 id="兴趣爱好">⛹ 兴趣爱好</h2>
-<h2 id="联系我呀">📬 联系我呀</h2>
+                <p>DP<br>
+<a href="https://www.luogu.com.cn/problem/P1004">原题</a></p>
+<pre><code class="language-C++">#include&lt;iostream&gt;
+using namespace std;
+int f[11][11][11][11];
+bool mark[11][11][11][11];
+int a[11][11];
+int n;
+int dfs(int x1,int y1,int x2,int y2)
+{
+	//cout&lt;&lt;x1&lt;&lt;&quot; &quot;&lt;&lt;y1&lt;&lt;&quot; &quot;&lt;&lt;x2&lt;&lt;&quot; &quot;&lt;&lt;y2&lt;&lt;endl;
+	if(mark[x1][y1][x2][y2]==1)
+		return f[x1][y1][x2][y2];
+	//cout&lt;&lt;1;
+	if(x1==y1&amp;&amp;y1==x2&amp;&amp;x2==y2&amp;&amp;y2==1)
+		return a[x1][y1];
+	//cout&lt;&lt;2;
+	if(x1&lt;1||x2&lt;1||y1&lt;1||y2&lt;1||x1&gt;n||x2&gt;n||y1&gt;n||y2&gt;n)
+		return -(1&lt;&lt;30);
+	//cout&lt;&lt;3;
+	int ret=0;
+	if(x1==x2&amp;&amp;y1==y2)
+	{
+		ret=a[x1][y1];
+	}
+	else
+	{
+		ret=a[x1][y1]+a[x2][y2];
+	}
+	int maxx=0;
+	int xp[]={0,-1};
+	int yp[]={-1,0};
+	//cout&lt;&lt;5;
+	for(int i=0;i&lt;2;++i)
+		for(int j=0;j&lt;2;++j)
+		{
+		//	cout&lt;&lt;4;
+			maxx=max(maxx,dfs(x1+xp[i],y1+yp[i],x2+xp[j],y2+yp[j]));
+		}
+	ret+=maxx;
+	f[x1][y1][x2][y2]=ret;
+	mark[x1][y1][x2][y2]=1;
+	return ret;
+}
+int main()
+{
+	cin&gt;&gt;n;
+	int x,y,z;
+	while(cin&gt;&gt;x&gt;&gt;y&gt;&gt;z)
+	{
+		if(x==y&amp;&amp;y==z&amp;&amp;z==0)
+			break;
+		a[x][y]=z;
+	}
+	cout&lt;&lt;dfs(n,n,n,n);
+	return 0;
+}
+</code></pre>
+<p><a href="https://www.luogu.com.cn/record/39265604">AC</a></p>
 
               </div>
               <div class="toc-container">
-                <ul class="markdownIt-TOC">
-<li>
-<ul>
-<li><a href="#%E5%85%B3%E4%BA%8E%E6%9C%AC%E7%AB%99">🏠 关于本站</a></li>
-<li><a href="#%E5%8D%9A%E4%B8%BB%E6%98%AF%E8%B0%81">👨‍💻 博主是谁</a></li>
-<li><a href="#%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD">⛹ 兴趣爱好</a></li>
-<li><a href="#%E8%81%94%E7%B3%BB%E6%88%91%E5%91%80">📬 联系我呀</a></li>
-</ul>
-</li>
-</ul>
-
+                
               </div>
             </div>
           </article>
         </div>
 
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://billpenn2005.github.io/post/lca/">
+              <h3 class="post-title">
+                LCA
+              </h3>
+            </a>
+          </div>
         
 
         

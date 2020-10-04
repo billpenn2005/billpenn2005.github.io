@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://billpenn2005.github.io</id>
     <title>Gridea</title>
-    <updated>2020-10-03T12:55:49.102Z</updated>
+    <updated>2020-10-04T12:16:57.760Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://billpenn2005.github.io"/>
     <link rel="self" href="https://billpenn2005.github.io/atom.xml"/>
@@ -10,6 +10,73 @@
     <logo>https://billpenn2005.github.io/images/avatar.png</logo>
     <icon>https://billpenn2005.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[NOIP2000 方格取数]]></title>
+        <id>https://billpenn2005.github.io/post/noip2000-fang-ge-qu-shu/</id>
+        <link href="https://billpenn2005.github.io/post/noip2000-fang-ge-qu-shu/">
+        </link>
+        <updated>2020-10-04T12:14:22.000Z</updated>
+        <content type="html"><![CDATA[<p>DP<br>
+<a href="https://www.luogu.com.cn/problem/P1004">原题</a></p>
+<pre><code class="language-C++">#include&lt;iostream&gt;
+using namespace std;
+int f[11][11][11][11];
+bool mark[11][11][11][11];
+int a[11][11];
+int n;
+int dfs(int x1,int y1,int x2,int y2)
+{
+	//cout&lt;&lt;x1&lt;&lt;&quot; &quot;&lt;&lt;y1&lt;&lt;&quot; &quot;&lt;&lt;x2&lt;&lt;&quot; &quot;&lt;&lt;y2&lt;&lt;endl;
+	if(mark[x1][y1][x2][y2]==1)
+		return f[x1][y1][x2][y2];
+	//cout&lt;&lt;1;
+	if(x1==y1&amp;&amp;y1==x2&amp;&amp;x2==y2&amp;&amp;y2==1)
+		return a[x1][y1];
+	//cout&lt;&lt;2;
+	if(x1&lt;1||x2&lt;1||y1&lt;1||y2&lt;1||x1&gt;n||x2&gt;n||y1&gt;n||y2&gt;n)
+		return -(1&lt;&lt;30);
+	//cout&lt;&lt;3;
+	int ret=0;
+	if(x1==x2&amp;&amp;y1==y2)
+	{
+		ret=a[x1][y1];
+	}
+	else
+	{
+		ret=a[x1][y1]+a[x2][y2];
+	}
+	int maxx=0;
+	int xp[]={0,-1};
+	int yp[]={-1,0};
+	//cout&lt;&lt;5;
+	for(int i=0;i&lt;2;++i)
+		for(int j=0;j&lt;2;++j)
+		{
+		//	cout&lt;&lt;4;
+			maxx=max(maxx,dfs(x1+xp[i],y1+yp[i],x2+xp[j],y2+yp[j]));
+		}
+	ret+=maxx;
+	f[x1][y1][x2][y2]=ret;
+	mark[x1][y1][x2][y2]=1;
+	return ret;
+}
+int main()
+{
+	cin&gt;&gt;n;
+	int x,y,z;
+	while(cin&gt;&gt;x&gt;&gt;y&gt;&gt;z)
+	{
+		if(x==y&amp;&amp;y==z&amp;&amp;z==0)
+			break;
+		a[x][y]=z;
+	}
+	cout&lt;&lt;dfs(n,n,n,n);
+	return 0;
+}
+</code></pre>
+<p><a href="https://www.luogu.com.cn/record/39265604">AC</a></p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[LCA]]></title>
         <id>https://billpenn2005.github.io/post/lca/</id>
