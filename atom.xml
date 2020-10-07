@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://billpenn2005.github.io</id>
     <title>Gridea</title>
-    <updated>2020-10-04T12:20:15.734Z</updated>
+    <updated>2020-10-07T05:54:37.177Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://billpenn2005.github.io"/>
     <link rel="self" href="https://billpenn2005.github.io/atom.xml"/>
@@ -10,6 +10,58 @@
     <logo>https://billpenn2005.github.io/images/avatar.png</logo>
     <icon>https://billpenn2005.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[选择客栈]]></title>
+        <id>https://billpenn2005.github.io/post/xuan-ze-ke-zhan/</id>
+        <link href="https://billpenn2005.github.io/post/xuan-ze-ke-zhan/">
+        </link>
+        <updated>2020-10-07T05:50:28.000Z</updated>
+        <content type="html"><![CDATA[<p>大水题🙃(本来想用线段树的)<br>
+<a href="https://www.luogu.com.cn/problem/P1311">原题</a></p>
+<pre><code class="language-C++">#include&lt;iostream&gt;
+using namespace std;
+int n,k,p;
+int a[300001],b[300001];
+int suma[300001];
+int ans=0;
+int main()
+{
+	cin&gt;&gt;n&gt;&gt;k&gt;&gt;p;
+	for(int i=1;i&lt;=n;++i)
+	{
+		cin&gt;&gt;a[i]&gt;&gt;b[i];
+		suma[a[i]]++;
+	}
+	for(int i=1;i&lt;=n;++i)
+	{
+		suma[a[i]]--;
+		int minn=b[i];
+		int tmpm=0;
+		for(int j=i+1;j&lt;=n;++j)
+		{
+			minn=min(minn,b[j]);
+			if(a[j]==a[i])
+			{
+				if(minn&lt;=p)
+				{
+					ans+=suma[a[i]]-tmpm;
+					break;
+				}
+				else
+				{
+					tmpm++;
+					continue;
+				}
+			}
+		}
+	}
+	cout&lt;&lt;ans&lt;&lt;endl;
+	return 0;
+}
+</code></pre>
+<p><a href="">AC</a></p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[NOIP2000 方格取数]]></title>
         <id>https://billpenn2005.github.io/post/noip2000-fang-ge-qu-shu/</id>
