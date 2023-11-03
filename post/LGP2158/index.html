@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>洛谷P2158 | BillPenn&#39;s Blog</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://billpenn2005.github.io/favicon.ico?v=1699014238929">
+<link rel="stylesheet" href="https://billpenn2005.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="题面：
+题目描述
+作为体育委员，C 君负责这次运动会仪仗队的训练。仪仗队是由学生组成的 N×NN \times NN×N 的方阵，为了保证队伍在行进中整齐划一，C 君会跟在仪仗队的左后方，根据其视线所及的学生人数来判断队伍是否整齐（如下图）..." />
+    <meta name="keywords" content="数论" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://billpenn2005.github.io">
+        <img src="https://billpenn2005.github.io/images/avatar.png?v=1699014238929" class="site-logo">
+        <h1 class="site-title">BillPenn&#39;s Blog</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://billpenn2005.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">洛谷P2158</h2>
+            <div class="post-date">2023-11-03</div>
+            
+            <div class="post-content" v-pre>
+              <h1 id="题面">题面：</h1>
+<h2 id="题目描述">题目描述</h2>
+<p>作为体育委员，C 君负责这次运动会仪仗队的训练。仪仗队是由学生组成的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>N</mi><mo>×</mo><mi>N</mi></mrow><annotation encoding="application/x-tex">N \times N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.76666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span></span></span></span> 的方阵，为了保证队伍在行进中整齐划一，C 君会跟在仪仗队的左后方，根据其视线所及的学生人数来判断队伍是否整齐（如下图）。</p>
+<figure data-type="image" tabindex="1"><img src="https://cdn.luogu.com.cn/upload/pic/1149.png" alt="" loading="lazy"></figure>
+<p>现在，C 君希望你告诉他队伍整齐时能看到的学生人数。</p>
+<h2 id="输入格式">输入格式</h2>
+<p>一行，一个正整数 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>N</mi></mrow><annotation encoding="application/x-tex">N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span></span></span></span>。</p>
+<h2 id="输出格式">输出格式</h2>
+<p>输出一行一个数，即 C 君应看到的学生人数。</p>
+<h2 id="提示">提示</h2>
+<p>对于 100% 的数据，1 &lt; N &lt; 40000。</p>
+<h1 id="方法">方法：</h1>
+<h2 id="分析">分析：</h2>
+<pre><code>* 由于视线不遮挡，因此横纵坐标必定互质。
+* 考虑使用欧拉函数计数
+* 注意n=1时的特判
+* 使用筛法求欧拉函数（效率更高）
+</code></pre>
+<h2 id="公式">公式:</h2>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo>(</mo><mi>n</mi><mo>)</mo><mo>=</mo><mn>2</mn><mo>(</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>2</mn></mrow><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></munderover><mrow><mi>φ</mi><mo>(</mo><mi>i</mi><mo>)</mo><mo>−</mo><mn>1</mn></mrow><mo>)</mo><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">f(n)=2(\sum_{i=2}^{n-1}{\varphi(i)-1})-1
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:3.0787820000000004em;vertical-align:-1.277669em;"></span><span class="mord">2</span><span class="mopen">(</span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.8011130000000004em;"><span style="top:-1.872331em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">2</span></span></span></span><span style="top:-3.050005em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.300005em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.277669em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">φ</span><span class="mopen">(</span><span class="mord mathdefault">i</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">1</span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span></span></p>
+<h1 id="代码">代码：</h1>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+using namespace std;
+#define ll long long
+bool mark[100001];
+ll pr[100001],itr=0;
+ll phi[100001];
+void get_prime()
+{
+    memset(mark,0,sizeof(mark));
+    phi[1]=1;
+    for(int i=2;i&lt;=40000;++i)
+    {
+        if(!mark[i])
+        {
+            pr[itr++]=i;
+            phi[i]=i-1;
+        }
+        for(int j=0;j&lt;itr;++j)
+        {
+            if(i*pr[j]&gt;40000)
+                break;
+            mark[i*pr[j]]=1;
+            if(i%pr[j]==0)
+            {
+                phi[i*pr[j]]=phi[i]*pr[j];
+                break;
+            }
+            else
+                phi[i*pr[j]]=phi[i]*(pr[j]-1);
+        }
+    }
+}
+ll N,ans=0;
+int main()
+{
+    get_prime();
+    cin&gt;&gt;N;
+    if(N==1)
+    {
+        cout&lt;&lt;0&lt;&lt;endl;
+        return 0;
+    }
+    ll tmp=0;
+    for(int i=2;i&lt;N;++i)
+        tmp+=phi[i]-1;
+    tmp+=N;
+    ans=(2*tmp)-1;
+    cout&lt;&lt;ans&lt;&lt;endl;
+    return 0;
+}
+</code></pre>
+<h1 id="ac记录"><a href="https://www.luogu.com.cn/record/132917872" title="AC">AC记录</a></h1>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://billpenn2005.github.io/tag/C4ulmpvoS/" class="tag">
+                    数论
+                  </a>
+                
+              </div>
+            
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  </body>
+</html>
